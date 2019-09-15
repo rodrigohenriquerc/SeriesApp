@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
+
 import Router from './Router';
 
+// Redux.
+import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
-
-import devToolsEnhancer from 'remote-redux-devtools';
-
-import Reactotron from 'reactotron-react-native'
-
+import { composeWithDevTools } from 'remote-redux-devtools';
+import Reactotron from 'reactotron-react-native';
+import thunk from 'redux-thunk';
 import rootReducer from './reducers';
 
-const store = createStore(rootReducer, devToolsEnhancer());
+const store = createStore(rootReducer, composeWithDevTools(
+  applyMiddleware(thunk)
+));
 
 export default class SeriesApp extends Component {
   componentDidMount() {

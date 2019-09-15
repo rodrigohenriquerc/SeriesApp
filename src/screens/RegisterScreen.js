@@ -118,11 +118,12 @@ export default class RegisterScreen extends React.Component {
           <TextInput
             placeholder='Senha'
             style={styles.input}
-            secureTextEntry
             value={this.state.password}
             onChangeText={value => this.onChangeHandler('password', value)}
             keyboardType='default'
             textContentType='password'
+            autoCapitalize='none'
+            secureTextEntry
           />
         </FormRow>
         {this.renderButton()}

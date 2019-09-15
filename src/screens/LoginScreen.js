@@ -1,14 +1,18 @@
 import React from 'react';
 import { Text, TextInput, StyleSheet, ActivityIndicator, KeyboardAvoidingView } from 'react-native';
 import firebase from 'firebase';
+import { connect } from 'react-redux';
+import { tryLogin } from '../actions';
 
 import FormRow from '../components/FormRow';
 import AuthButton from '../components/AuthButton';
 
-export default class LoginScreen extends React.Component {
+class LoginScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      // email: 'rodrigo@teste.com.br',
+      // password: '123456',
       email: '',
       password: '',
       isLoading: false,
@@ -42,24 +46,21 @@ export default class LoginScreen extends React.Component {
       isLoading: true,
       message: ''
     });
-    const { email, password } = this.state;
-    firebase
-      .auth()
-      .signInWithEmailAndPassword(email, password)
-      .then(user => {
-        this.setState({
-          message: 'Sucesso!'
-        })
-      })
-      .catch(error => {
-        this.setState({
-          message: this.getMessageByErrorCode(error.code)
-        });
-      })
+
+    const {
+      email,
+      password
+    } = this.state;
+
+    this.props.tryLogin({
+      email,
+      password
+    })
       .then(() => {
         this.setState({
-          isLoading: false
+          message: 'Sucesso!'
         });
+        this.props.navigation.replace('Main');
       });
   }
 
@@ -97,7 +98,7 @@ export default class LoginScreen extends React.Component {
     );
   }
 
-  navigateToRegisterScreen = (firebaseConfig) => {
+  navigateToRegisterScreen = firebaseConfig => {
     this.props.navigation.navigate('Register', firebaseConfig);
   }
 
@@ -120,11 +121,12 @@ export default class LoginScreen extends React.Component {
           <TextInput
             placeholder='Senha'
             style={styles.input}
-            secureTextEntry
             value={this.state.password}
             onChangeText={value => this.onChangeHandler('password', value)}
             keyboardType='default'
             textContentType='password'
+            autoCapitalize='none'
+            secureTextEntry
           />
         </FormRow>
         {this.renderButton()}
@@ -157,3 +159,5 @@ const styles = StyleSheet.create({
     padding: 5
   }
 });
+
+export default connect(null, { tryLogin })(LoginScreen);

@@ -2,6 +2,7 @@ import { createAppContainer, createStackNavigator } from 'react-navigation';
 
 import LoginScreen from './screens/LoginScreen';
 import RegisterScreen from './screens/RegisterScreen';
+import MainScreen from './screens/MainScreen';
 
 const AppNavigator = createStackNavigator({
   'Login': {
@@ -15,6 +16,9 @@ const AppNavigator = createStackNavigator({
     navigationOptions: {
       title: 'Novo usuário'
     }
+  },
+  'Main': {
+    screen: MainScreen
   }
 }, {
   defaultNavigationOptions: {
