@@ -19,10 +19,4 @@ export const tryLogin = ({ email, password }) => dispatch => {
       const action = userLoginSuccess(user);
       dispatch(action);
     })
-  // .catch(loginUserFailed)
-  // .then(() => {
-  //   this.setState({
-  //     isLoading: false
-  //   });
-  // });
 }
