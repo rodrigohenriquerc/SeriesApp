@@ -5,6 +5,9 @@ import RegisterScreen from './screens/RegisterScreen';
 import MainScreen from './screens/MainScreen';
 
 const AppNavigator = createStackNavigator({
+  'Main': {
+    screen: MainScreen
+  },
   'Login': {
     screen: LoginScreen,
     navigationOptions: {
@@ -16,9 +19,6 @@ const AppNavigator = createStackNavigator({
     navigationOptions: {
       title: 'Novo usuário'
     }
-  },
-  'Main': {
-    screen: MainScreen
   }
 }, {
   defaultNavigationOptions: {
