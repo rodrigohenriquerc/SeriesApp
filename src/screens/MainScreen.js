@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, FlatList } from 'react-native';
 
+// Components.
+import SerieCard from '../components/SerieCard';
+
+// Data.
 import series from '../../series.json';
 
 export default class MainScreen extends Component {
@@ -15,12 +19,13 @@ export default class MainScreen extends Component {
       <View style={styles.container}>
         <FlatList
           data={series}
-          renderItem={({ item }) => (
-            <View>
-              <Text>{`${item.id} - ${item.title}`}</Text>
-            </View>
+          renderItem={({ item }) => (  
+            <SerieCard
+              item={item}
+            />
           )}
           keyExtractor={item => (item.id).toString()}
+          numColumns={2}
         />
       </View>
     );
@@ -30,6 +35,7 @@ export default class MainScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    width: '100%'
+    width: '100%',
+    padding: 10
   }
 });
