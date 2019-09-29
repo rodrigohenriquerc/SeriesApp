@@ -3,48 +3,36 @@ import { View, StyleSheet, Dimensions, ScrollView } from 'react-native';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 
-import SeriePhoto from '../components/serie/SeriePhoto';
-import SerieTitle from '../components/serie/SerieTitle';
-import SerieGender from '../components/serie/SerieGender';
-import SerieRate from '../components/serie/SerieRate';
-import SerieDescription from '../components/serie/SerieDescription';
+import SeriePhoto from '../components/serie/serieDetails/SeriePhoto';
+import SerieTitle from '../components/serie/serieDetails/SerieTitle';
+import SerieGender from '../components/serie/serieDetails/SerieGender';
+import SerieRate from '../components/serie/serieDetails/SerieRate';
+import SerieDescription from '../components/serie/serieDetails/SerieDescription';
 
 export default class SerieDetailsScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      serie: null
     };
   }
 
-  componentDidMount = () => {
-    const { params } = this.props.navigation.state;
-    const serie = params ? params.serie : null;
-    this.setState({
-      serie
-    });
-  }
-
   render() {
-    let { serie } = this.state;
-    if (serie) {
-      return (
-        <ScrollView style={styles.container}>
-          <SeriePhoto image={serie.img} />
-          <View style={styles.containerContent}>
-            <SerieTitle title={serie.title} />
-            <View style={styles.containerMoreInfo}>
-              <SerieGender gender={serie.gender} />
-              <View style={styles.division}>
-              </View>
-              <SerieRate rate={serie.rate} />
+    const { serie } = this.props.navigation.state.params;
+    return (
+      <ScrollView style={styles.container}>
+        <SeriePhoto image={serie.img} />
+        <View style={styles.containerContent}>
+          <SerieTitle title={serie.title} />
+          <View style={styles.containerMoreInfo}>
+            <SerieGender gender={serie.gender} />
+            <View style={styles.division}>
             </View>
-            <SerieDescription description={serie.description} />
+            <SerieRate rate={serie.rate} />
           </View>
-        </ScrollView>
-      );
-    }
-    return <View></View>;
+          <SerieDescription description={serie.description} />
+        </View>
+      </ScrollView>
+    );
   }
 }
 

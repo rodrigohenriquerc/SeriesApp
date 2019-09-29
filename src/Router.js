@@ -4,18 +4,26 @@ import LoginScreen from './screens/LoginScreen';
 import RegisterScreen from './screens/RegisterScreen';
 import MainScreen from './screens/MainScreen';
 import SerieDetailsScreen from './screens/SerieDetailsScreen';
+import FormScreen from './screens/FormScreen';
 
 const AppNavigator = createStackNavigator({
+  'Form': {
+    screen: FormScreen,
+    navigationOptions: {
+      title: 'Nova série'
+    }
+  },
+
   'Main': {
     screen: MainScreen
   },
-  
+
   'Details': {
     screen: SerieDetailsScreen,
     navigationOptions: ({ navigation }) => {
-      const { title } = navigation.state.params.serie;
+      const { serie } = navigation.state.params;
       return ({
-        title: title
+        title: serie.title
       });
     }
   },
@@ -26,7 +34,7 @@ const AppNavigator = createStackNavigator({
       title: 'Bem vindo'
     }
   },
-  
+
   'Register': {
     screen: RegisterScreen,
     navigationOptions: {

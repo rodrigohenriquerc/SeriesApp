@@ -14,8 +14,6 @@ const BORDER_RADIUS = 10;
 
 const SerieCard = ({ item, onPress }) => {
 
-  console.log('Item: ', item);
-
   return (
     <TouchableOpacity
       style={styles.container}
@@ -43,8 +41,7 @@ const styles = StyleSheet.create({
     height: SCREEN_WIDTH / 2,
     alignItems: 'center',
     justifyContent: 'center',
-    padding: 10,
-    borderRadius: BORDER_RADIUS
+    padding: 10
   },
 
   containerContent: {

@@ -1,0 +1,5 @@
+1 - Piece of state;
+2 - Reducer;
+3 - Action type;
+4 - Action creator;
+5 - Connect screen.
