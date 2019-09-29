@@ -14,14 +14,19 @@ export default class MainScreen extends Component {
     };
   }
 
+  onPressSerieCard = serie => {
+    this.props.navigation.navigate('Details', { serie: serie });
+  }
+
   render() {
     return (
       <View style={styles.container}>
         <FlatList
           data={series}
-          renderItem={({ item }) => (  
+          renderItem={({ item }) => (
             <SerieCard
               item={item}
+              onPress={() => this.onPressSerieCard(item)}
             />
           )}
           keyExtractor={item => (item.id).toString()}

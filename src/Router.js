@@ -3,17 +3,30 @@ import { createAppContainer, createStackNavigator } from 'react-navigation';
 import LoginScreen from './screens/LoginScreen';
 import RegisterScreen from './screens/RegisterScreen';
 import MainScreen from './screens/MainScreen';
+import SerieDetailsScreen from './screens/SerieDetailsScreen';
 
 const AppNavigator = createStackNavigator({
   'Main': {
     screen: MainScreen
   },
+  
+  'Details': {
+    screen: SerieDetailsScreen,
+    navigationOptions: ({ navigation }) => {
+      const { title } = navigation.state.params.serie;
+      return ({
+        title: title
+      });
+    }
+  },
+
   'Login': {
     screen: LoginScreen,
     navigationOptions: {
       title: 'Bem vindo'
     }
   },
+  
   'Register': {
     screen: RegisterScreen,
     navigationOptions: {

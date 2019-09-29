@@ -4,17 +4,23 @@ import {
   View,
   StyleSheet,
   Dimensions,
-  Image
+  Image,
+  TouchableOpacity
 } from 'react-native';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 
-const SerieCard = ({ item }) => {
+const BORDER_RADIUS = 10;
+
+const SerieCard = ({ item, onPress }) => {
 
   console.log('Item: ', item);
 
   return (
-    <View style={styles.container}>
+    <TouchableOpacity
+      style={styles.container}
+      onPress={onPress}
+    >
       <View style={styles.containerContent}>
         <Image
           source={{ uri: item.img }}
@@ -25,7 +31,7 @@ const SerieCard = ({ item }) => {
           <Text style={styles.title}>{item.title}</Text>
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
@@ -33,11 +39,12 @@ export default SerieCard;
 
 const styles = StyleSheet.create({
   container: {
-    width: SCREEN_WIDTH / 2,
+    width: '50%',
     height: SCREEN_WIDTH / 2,
     alignItems: 'center',
     justifyContent: 'center',
-    padding: 10
+    padding: 10,
+    borderRadius: BORDER_RADIUS
   },
 
   containerContent: {
@@ -45,12 +52,14 @@ const styles = StyleSheet.create({
     height: '100%',
     alignItems: 'center',
     justifyContent: 'center',
-    // backgroundColor: 'green'
+    borderRadius: BORDER_RADIUS
   },
 
   _image: {
-    aspectRatio: 1,
-    width: '100%'
+    // aspectRatio: 1,
+    width: '100%',
+    height: '100%',
+    borderRadius: BORDER_RADIUS
   },
 
   containerTitle: {
@@ -60,7 +69,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     position: 'absolute',
     bottom: 0,
-    backgroundColor: 'rgba(0, 0, 0, .85)'
+    backgroundColor: 'rgba(0, 0, 0, .85)',
+    borderBottomLeftRadius: BORDER_RADIUS,
+    borderBottomRightRadius: BORDER_RADIUS
   },
 
   title: {
