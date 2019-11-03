@@ -1,27 +1,36 @@
 import React from 'react';
-import { Text, TextInput, StyleSheet, ActivityIndicator, KeyboardAvoidingView } from 'react-native';
+import {
+  Text,
+  TextInput,
+  StyleSheet,
+  ActivityIndicator,
+  KeyboardAvoidingView
+} from 'react-native';
 import firebase from 'firebase';
-import { connect } from 'react-redux';
-import { tryLogin } from '../actions';
 
+// Components.
 import FormRow from '../components/FormRow';
 import AuthButton from '../components/AuthButton';
+
+// Redux.
+import { connect } from 'react-redux';
+import { tryLogin } from '../actions';
 
 class LoginScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      // email: 'rodrigo@teste.com.br',
-      // password: '123456',
-      email: '',
-      password: '',
+      email: 'rodrigo@teste.com.br',
+      password: '123456',
+      // email: '',
+      // password: '',
       isLoading: false,
       message: ''
     }
   }
 
   componentDidMount() {
-    // Your web app's Firebase configuration
+    // Your web app's Firebase configuration.
     const firebaseConfig = {
       apiKey: "AIzaSyBqUC26A9XxTYNGXF-lzfgyyqhSbYNOx8I",
       authDomain: "series-eeb87.firebaseapp.com",
@@ -31,8 +40,10 @@ class LoginScreen extends React.Component {
       messagingSenderId: "272660421192",
       appId: "1:272660421192:web:d3660a379b5d5b3a"
     };
-    // Initialize Firebase
+    // Initialize Firebase.
     firebase.initializeApp(firebaseConfig);
+
+    this.tryLogin();
   }
 
   onChangeHandler(field, value) {

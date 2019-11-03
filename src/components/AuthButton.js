@@ -6,7 +6,7 @@ const AuthButton = props => {
   const { title, handleEvent, second } = props;
 
   return (
-    <View style={[second ? styles.second : null]}>
+    <View style={second ? styles.second : null}>
       <Button
         title={title}
         color='#303030'

@@ -1,7 +1,14 @@
 import React from 'react';
-import { Text, TextInput, StyleSheet, ActivityIndicator, KeyboardAvoidingView } from 'react-native';
+import {
+  Text,
+  TextInput,
+  StyleSheet,
+  ActivityIndicator,
+  KeyboardAvoidingView
+} from 'react-native';
 import firebase from 'firebase';
 
+// Components.
 import FormRow from '../components/FormRow';
 import AuthButton from '../components/AuthButton';
 

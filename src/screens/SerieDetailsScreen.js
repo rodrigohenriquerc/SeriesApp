@@ -1,13 +1,20 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Dimensions, ScrollView } from 'react-native';
+import {
+  View,
+  StyleSheet,
+  Dimensions,
+  ScrollView
+} from 'react-native';
 
-const SCREEN_WIDTH = Dimensions.get('window').width;
-
+// Components.
 import SeriePhoto from '../components/serie/serieDetails/SeriePhoto';
 import SerieTitle from '../components/serie/serieDetails/SerieTitle';
 import SerieGender from '../components/serie/serieDetails/SerieGender';
 import SerieRate from '../components/serie/serieDetails/SerieRate';
 import SerieDescription from '../components/serie/serieDetails/SerieDescription';
+import AuthButton from '../components/AuthButton';
+
+const SCREEN_WIDTH = Dimensions.get('window').width;
 
 export default class SerieDetailsScreen extends Component {
   constructor(props) {
@@ -18,6 +25,7 @@ export default class SerieDetailsScreen extends Component {
 
   render() {
     const { serie } = this.props.navigation.state.params;
+    const { navigation } = this.props;
     return (
       <ScrollView style={styles.container}>
         <SeriePhoto image={serie.img} />
@@ -31,6 +39,10 @@ export default class SerieDetailsScreen extends Component {
           </View>
           <SerieDescription description={serie.description} />
         </View>
+        <AuthButton
+          title='Atualizar'
+          handleEvent={() => navigation.replace('Form', { serieToEdit: serie })}
+        />
       </ScrollView>
     );
   }
