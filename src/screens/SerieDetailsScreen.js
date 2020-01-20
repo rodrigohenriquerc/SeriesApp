@@ -14,15 +14,14 @@ import SerieRate from '../components/serie/serieDetails/SerieRate';
 import SerieDescription from '../components/serie/serieDetails/SerieDescription';
 import AuthButton from '../components/AuthButton';
 
+// Redux.
+import { connect } from 'react-redux';
+import { deleteSerie } from '../actions';
+
+// Constants.
 const SCREEN_WIDTH = Dimensions.get('window').width;
 
-export default class SerieDetailsScreen extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-    };
-  }
-
+class SerieDetailsScreen extends Component {
   render() {
     const { serie } = this.props.navigation.state.params;
     const { navigation } = this.props;
@@ -39,14 +38,30 @@ export default class SerieDetailsScreen extends Component {
           </View>
           <SerieDescription description={serie.description} />
         </View>
-        <AuthButton
-          title='Atualizar'
-          handleEvent={() => navigation.replace('Form', { serieToEdit: serie })}
-        />
+        <View style={styles.containerButton}>
+          <AuthButton
+            title='Atualizar'
+            handleEvent={() => navigation.replace('Form', { serieToEdit: serie })}
+          />
+          <AuthButton
+            title='Deletar'
+            second
+            bottom
+            red
+            handleEvent={async () => {
+              const deleted = await this.props.deleteSerie(serie);
+              if (deleted) {
+                navigation.goBack();
+              }
+            }}
+          />
+        </View>
       </ScrollView>
     );
   }
 }
+
+export default connect(null, { deleteSerie })(SerieDetailsScreen);
 
 const styles = StyleSheet.create({
   container: {
@@ -78,5 +93,10 @@ const styles = StyleSheet.create({
     borderRadius: 2.5,
     backgroundColor: '#000',
     marginHorizontal: 10
+  },
+
+  containerButton: {
+    width: SCREEN_WIDTH,
+    paddingHorizontal: 10
   }
 });

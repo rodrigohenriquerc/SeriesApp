@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import { YellowBox } from 'react-native';
 
+// Router.
 import Router from './Router';
 
 // Redux.
@@ -9,6 +11,8 @@ import { composeWithDevTools } from 'remote-redux-devtools';
 import Reactotron from 'reactotron-react-native';
 import thunk from 'redux-thunk';
 import rootReducer from './reducers';
+
+YellowBox.ignoreWarnings(['Setting a timer']);
 
 const store = createStore(rootReducer, composeWithDevTools(
   applyMiddleware(thunk)
